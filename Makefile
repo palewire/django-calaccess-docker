@@ -1,7 +1,7 @@
 .PHONY: image container test
 
 image:
-	sudo docker build -t django-calaccess ./0.1/
+	sudo docker build -t ccdc/django-calaccess ./0.1/
 
 container:
 	sudo docker run \
@@ -13,7 +13,7 @@ container:
 		-e DJANGO_USER=admin \
 		-e DJANGO_EMAIL=foo@bar.com \
 		-e DJANGO_PASSWORD=mydjangopassword \
-		-d django-calaccess
+		-d ccdc/django-calaccess:0.1
 test:
 	sudo docker kill test-calaccess
 	sudo docker rm test-calaccess
