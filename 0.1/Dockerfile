@@ -31,6 +31,7 @@ RUN apt-get install -y \
 # Create application group and user
 RUN groupadd -g 1850 ccdc
 RUN useradd -u 2014 -g 6 ccdc
+RUN mkdir -p /home/ccdc/
 
 # Install Apache
 RUN apt-get install -y \

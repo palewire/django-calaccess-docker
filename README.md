@@ -12,10 +12,13 @@ $ sudo docker build -t django-calaccess .
 
 ```bash
 $ sudo docker run \
-    -p 127.0.0.1:8080:80 \
     --name test-calaccess \
-    -e MYSQL_DATABASE=ccdc \
+    -d django-calaccess \
+    -p 127.0.0.1:8080:80 \
+    -e MYSQL_DATABASE=calaccess \
     -e MYSQL_USER=ccdc \
-    -e MYSQL_PASSWORD=ccdc \
-    -d django-calaccess
+    -e MYSQL_PASSWORD=mycrazypassword \
+    -e DJANGO_USER=admin \
+    -e DJANGO_EMAIL=foo@bar.com \
+    -e DJANGO_PASSWORD=mydjangopassword
 ```
