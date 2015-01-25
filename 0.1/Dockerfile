@@ -59,18 +59,14 @@ RUN /apps/calaccess/bin/pip install -r /apps/calaccess/code/requirements.txt
 # Clean up apt when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Boot the services and app
-#ADD run.sh /run.sh
-#RUN chmod 755 /*.sh
-#CMD ["/run.sh"]
-
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+# Boot up MySQL
+COPY entrypoint-mysql.sh /entrypoint-mysql.sh
+RUN chmod 755 /entrypoint-mysql.sh
+ENTRYPOINT ["/entrypoint-mysql.sh"]
 CMD ["mysqld"]
 
-# Apache
+# Boot up Apache
 EXPOSE 80
-COPY httpd-foreground /usr/local/bin/
-RUN chmod 755 /usr/local/bin/httpd-foreground
-CMD ["httpd-foreground"]
+ADD run-apache.sh /run-apache.sh
+RUN chmod 755 /run-apache.sh
+CMD ["/run-apache.sh"]
