@@ -17,13 +17,14 @@ applications for analyzing the California Secretary of State’s CAL-ACCESS data
 
 The following environmental options must be configured at runtime when initializing a new container.
 
-|**ENV variable**|**Definition**|
-|MYSQL_DATABASE|The name of the MySQL database|
-|MYSQL_USER|The MySQL database user's name|
-|MYSQL_PASSWORD|The password for the MySQL user|
-|DJANGO_USER|The name of the Django admin super user|
-|DJANGO_EMAIL|The email of the Django admin super user|
-|DJANGO_PASSWORD|The password of the Django admin super user|
+ENV variable    | Definition
+--------------- | ----------
+MYSQL_DATABASE  | The name of the MySQL database
+MYSQL_USER      | The MySQL database user's name
+MYSQL_PASSWORD  | The password for the MySQL user
+DJANGO_USER     | The name of the Django admin super user
+DJANGO_EMAIL    | The email of the Django admin super user
+DJANGO_PASSWORD | The password of the Django admin super user
 
 
 ### Getting started
