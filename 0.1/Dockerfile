@@ -44,6 +44,9 @@ RUN apt-get install -y \
     libapache2-mod-auth-mysql \
     libmysqlclient-dev
 
+# Clean up apt
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Install Django application
 RUN mkdir /apps/
 WORKDIR /apps/
@@ -54,19 +57,15 @@ WORKDIR /apps/calaccess/
 RUN /apps/calaccess/bin/django-admin.py startproject --extension=py,.gitignore --template=https://github.com/california-civic-data-coalition/django-calaccess-project-template/archive/master.zip project code
 RUN /apps/calaccess/bin/pip install -r /apps/calaccess/code/requirements.txt
 
-# Set cron
-
-# Clean up apt when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 # Configure Apache
 EXPOSE 80
-COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf
-COPY apache2.conf /etc/apache2/apache2.conf
+COPY apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY apache/apache2.conf /etc/apache2/apache2.conf
 
-RUN mkdir -p /etc/my_init.d
-ADD 01_run_apache.sh /etc/my_init.d/01_run_apache.sh
-ADD 02_run_mysql.sh /etc/my_init.d/02_run_mysql.sh
-ADD 03_configure_mysql.sh /etc/my_init.d/03_configure_mysql.sh
-ADD 04_configure_django.sh /etc/my_init.d/04_configure_django.sh
+# Fire up all the services
+ADD my_init.d/01_run_apache.sh /etc/my_init.d/01_run_apache.sh
+ADD my_init.d/02_run_mysql.sh /etc/my_init.d/02_run_mysql.sh
+ADD my_init.d/03_configure_mysql.sh /etc/my_init.d/03_configure_mysql.sh
+ADD my_init.d/04_configure_django.sh /etc/my_init.d/04_configure_django.sh
+ADD my_init.d/05_configure_crontab.sh /etc/my_init.d/05_configure_crontab.sh
 RUN chmod 755 /etc/my_init.d/*.sh
