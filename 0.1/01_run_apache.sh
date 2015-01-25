@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
-chown ccdc:ccdc /apps/ -R
+chown www-data:www-data /apps/ -R
 source /etc/apache2/envvars
 service apache2 restart
