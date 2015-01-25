@@ -1,2 +1,2 @@
 #!/bin/bash
-service mysql restart;
+sudo service mysql restart;
