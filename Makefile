@@ -1,7 +1,7 @@
 .PHONY: image container test
 
 image:
-	sudo docker build -t ccdc/django-calaccess ./0.1/
+	sudo docker build -t ccdc/django-calaccess ./src/
 
 container:
 	sudo docker run \
