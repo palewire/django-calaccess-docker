@@ -29,7 +29,7 @@ DJANGO_PASSWORD | The password of the Django admin super user
 
 ### Getting started
 
-To create a container using this image, start by retriving the image from Docker Hub.
+To create a container using this image, start by retriving the image from [Docker Hub](https://registry.hub.docker.com/u/ccdc/django-calaccess/).
 
 ```bash
 $ sudo docker pull ccdc/django-calaccess:0.1
