@@ -38,6 +38,7 @@ RUN apt-get install -y \
     apache2 \
     libapache2-mod-wsgi \
     libapache2-mod-rpaf
+ENV APACHE_LOG_DIR /var/log/
 
 # Install MySQL
 RUN apt-get install -y \
