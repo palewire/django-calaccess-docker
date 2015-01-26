@@ -55,7 +55,7 @@ RUN virtualenv calaccess
 RUN /apps/calaccess/bin/pip install django
 RUN mkdir /apps/calaccess/code/
 WORKDIR /apps/calaccess/
-RUN /apps/calaccess/bin/django-admin.py startproject --extension=py,.gitignore --template=https://github.com/california-civic-data-coalition/django-calaccess-project-template/archive/master.zip project code
+RUN /apps/calaccess/bin/django-admin.py startproject --extension=py,.gitignore --template=https://github.com/california-civic-data-coalition/django-calaccess-project-template/archive/v0.1.0.zip project code
 RUN /apps/calaccess/bin/pip install -r /apps/calaccess/code/requirements.txt
 
 # Configure Apache
