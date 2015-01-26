@@ -56,7 +56,7 @@ see the stack in action.
 
 ### Deploying to Amazon Web Services via Elastic Beanstalk
 
-First you much have an AWS account configured for Elastic Beanstalk and 
+First you must have an AWS account configured for Elastic Beanstalk and 
 install the ``eb`` command line utility. You'll need to use ``eb init``
 and ``eb create`` to get a repository ready to roll. 
 
