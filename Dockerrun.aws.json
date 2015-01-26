@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "ccdc/django-calaccess:0.2",
+    "Name": "ccdc/django-calaccess:0.3",
     "Update": "true"
   },
   "Ports": [
