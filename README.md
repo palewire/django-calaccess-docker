@@ -32,7 +32,7 @@ DJANGO_PASSWORD | The password of the Django admin super user
 To create a container using this image, start by retriving the image from [Docker Hub](https://registry.hub.docker.com/u/ccdc/django-calaccess/).
 
 ```bash
-$ sudo docker pull ccdc/django-calaccess:0.1
+$ sudo docker pull ccdc/django-calaccess:0.6
 ```
 
 Then fire up the container with all the required environmental settings included
@@ -48,11 +48,66 @@ $ sudo docker run \
 	-e DJANGO_USER=admin \
 	-e DJANGO_EMAIL=foo@bar.com \
 	-e DJANGO_PASSWORD=mydjangopassword \
-	-d ccdc/django-calaccess:0.1
+	-d ccdc/django-calaccess:0.6
 ```
 
 Once that finishes, visit [localhost](http://localhost) in your browser to
 see the stack in action.
+
+### Deploying to Amazon Web Services via Elastic Beanstalk
+
+First you much have an AWS account configured for Elastic Beanstalk and 
+install the ``eb`` command line utility. You'll need to use ``eb init``
+and ``eb create`` to get a repository ready to roll. 
+
+Then create a ``Dockerrun.aws.json`` file that looks something like this.
+
+```json
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "ccdc/django-calaccess:0.6",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "80"
+    }
+  ],
+  "Logging": "/var/log/"
+}
+```
+
+Create a new directory for Elastic Beanstalk configuration.
+
+```bash
+$ mkdir .ebextensions
+```
+
+Then add a file called ``01env.config`` and configure the environment variables
+with your own credentials.
+
+```yaml
+option_settings:
+  - option_name: MYSQL_DATABASE
+    value: calaccess
+  - option_name: MYSQL_USER
+    value: ccdc
+  - option_name: MYSQL_PASSWORD
+    value: yourcrazypassword
+  - option_name: DJANGO_USER
+    value: admin
+  - option_name: DJANGO_EMAIL
+    value: foo@bar.com
+  - option_name: DJANGO_PASSWORD
+    value: yourdjangopassword
+```
+
+Fire away!
+
+```bash
+$ eb deploy
+```
 
 ### Building the Docker image from source
 
